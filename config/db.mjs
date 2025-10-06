@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
 /*
   Common reasons for ECONNREFUSED ::1:27017 when connecting to MongoDB:
@@ -17,7 +19,7 @@ import mongoose from 'mongoose';
 export async function connectDB() {
   try {
     // Use 127.0.0.1 to force IPv4 connection
-    await mongoose.connect('mongodb://127.0.0.1:27017/text-video-app');
+    await mongoose.connect(process.env.MONGO_URI);
     console.log('✅ MongoDB connected');
   } catch (error) {
     console.error('❌ MongoDB connection error:', error.message);
